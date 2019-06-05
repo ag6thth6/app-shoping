@@ -18,9 +18,15 @@ class LinebotsController < ApplicationController
         when Line::Bot::Event::MessageType::Text
           # 入力した文字をinputに格納
           input = event.message['text']
-          # search_and_create_messageメソッド内で、楽天APIを用いた商品検索、メッセージの作成を行う
-          message = search_and_create_message(input)
-          client.reply_message(event['replyToken'], message)
+          case input
+          when 'こんにちは'
+          	message = { type: 'text', text: "こんにちは！"}
+          else
+          	client.reply_message(event['replyToken'], message)
+	        # search_and_create_messageメソッド内で、楽天APIを用いた商品検索、メッセージの作成を行う
+    	    message = search_and_create_message(input)
+        	client.reply_message(event['replyToken'], message)
+          end
         end
       end
     end
