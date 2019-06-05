@@ -68,7 +68,7 @@ class LinebotsController < ApplicationController
 
   def make_part(item)
     title = item['itemName']
-    price = item['itemPrice'].to_s
+    price = item['itemPrice'].to_s + "円"
     url = item['itemUrl']
     image = item['mediumImageUrls'].first
     {
@@ -117,7 +117,7 @@ class LinebotsController < ApplicationController
             "style": "primary",
             "action": {
               "type": "uri",
-              "label": "Amazon商品ページへ",
+              "label": "商品ページへ",
               "uri": url
             }
           }
