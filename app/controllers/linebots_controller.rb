@@ -21,8 +21,8 @@ class LinebotsController < ApplicationController
           case input
           when 'こんにちは'
           	message = { type: 'text', text: "こんにちは！"}
-          else
           	client.reply_message(event['replyToken'], message)
+          else
 	        # search_and_create_messageメソッド内で、楽天APIを用いた商品検索、メッセージの作成を行う
     	    message = search_and_create_message(input)
         	client.reply_message(event['replyToken'], message)
