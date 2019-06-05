@@ -43,7 +43,7 @@ class LinebotsController < ApplicationController
     end
     # 楽天の商品検索APIで画像がある商品の中で、入力値で検索して上から3件を取得する
     # 商品検索+ランキングでの取得はできないため標準の並び順で上から3件取得する
-    res = RakutenWebService::Ichiba::Item.search(keyword: input, hits: 10, imageFlag: 1)
+    res = RakutenWebService::Ichiba::Item.search(applicationId:ENV['RAKUTEN_APPID'], affiliateId: ENV['RAKUTEN_AFID'], keyword: input, hits: 10, imageFlag: 1)
     items = []
     # 取得したデータを使いやすいように配列に格納し直す
     items = res.map{|item| item}
