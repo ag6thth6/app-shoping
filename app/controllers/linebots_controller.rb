@@ -1,7 +1,7 @@
 class LinebotsController < ApplicationController
   require 'line/bot'
 
-  # callbackƒAƒNƒVƒ‡ƒ“‚ÌCSRFƒg[ƒNƒ“”FØ‚ð–³Œø
+  # callbackã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã®CSRFãƒˆãƒ¼ã‚¯ãƒ³èªè¨¼ã‚’ç„¡åŠ¹
   protect_from_forgery except: [:callback]
 
   def callback
@@ -16,9 +16,9 @@ class LinebotsController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          # “ü—Í‚µ‚½•¶Žš‚ðinput‚ÉŠi”[
+          # å…¥åŠ›ã—ãŸæ–‡å­—ã‚’inputã«æ ¼ç´
           input = event.message['text']
-          # search_and_create_messageƒƒ\ƒbƒh“à‚ÅAŠy“VAPI‚ð—p‚¢‚½¤•iŒŸõAƒƒbƒZ[ƒW‚Ìì¬‚ðs‚¤
+          # search_and_create_messageãƒ¡ã‚½ãƒƒãƒ‰å†…ã§ã€æ¥½å¤©APIã‚’ç”¨ã„ãŸå•†å“æ¤œç´¢ã€ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ä½œæˆã‚’è¡Œã†
           message = search_and_create_message(input)
           client.reply_message(event['replyToken'], message)
         end
@@ -41,11 +41,11 @@ class LinebotsController < ApplicationController
       c.application_id = ENV['RAKUTEN_APPID']
       c.affiliate_id = ENV['RAKUTEN_AFID']
     end
-    # Šy“V‚Ì¤•iŒŸõAPI‚Å‰æ‘œ‚ª‚ ‚é¤•i‚Ì’†‚ÅA“ü—Í’l‚ÅŒŸõ‚µ‚Äã‚©‚ç3Œ‚ðŽæ“¾‚·‚é
-    # ¤•iŒŸõ+ƒ‰ƒ“ƒLƒ“ƒO‚Å‚ÌŽæ“¾‚Í‚Å‚«‚È‚¢‚½‚ß•W€‚Ì•À‚Ñ‡‚Åã‚©‚ç3ŒŽæ“¾‚·‚é
+    # æ¥½å¤©ã®å•†å“æ¤œç´¢APIã§ç”»åƒãŒã‚ã‚‹å•†å“ã®ä¸­ã§ã€å…¥åŠ›å€¤ã§æ¤œç´¢ã—ã¦ä¸Šã‹ã‚‰3ä»¶ã‚’å–å¾—ã™ã‚‹
+    # å•†å“æ¤œç´¢+ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã§ã®å–å¾—ã¯ã§ããªã„ãŸã‚æ¨™æº–ã®ä¸¦ã³é †ã§ä¸Šã‹ã‚‰3ä»¶å–å¾—ã™ã‚‹
     res = RakutenWebService::Ichiba::Item.search(keyword: input, hits: 3, imageFlag: 1)
     items = []
-    # Žæ“¾‚µ‚½ƒf[ƒ^‚ðŽg‚¢‚â‚·‚¢‚æ‚¤‚É”z—ñ‚ÉŠi”[‚µ’¼‚·
+    # å–å¾—ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’ä½¿ã„ã‚„ã™ã„ã‚ˆã†ã«é…åˆ—ã«æ ¼ç´ã—ç›´ã™
     items = res.map{|item| item}
     make_reply_content(items)
   end
@@ -68,7 +68,7 @@ class LinebotsController < ApplicationController
 
   def make_part(item)
     title = item['itemName']
-    price = item['itemPrice'].to_s + "‰~"
+    price = item['itemPrice'].to_s
     url = item['itemUrl']
     image = item['mediumImageUrls'].first
     {
@@ -117,7 +117,7 @@ class LinebotsController < ApplicationController
             "style": "primary",
             "action": {
               "type": "uri",
-              "label": "Amazon¤•iƒy[ƒW‚Ö",
+              "label": "Amazonå•†å“ãƒšãƒ¼ã‚¸ã¸",
               "uri": url
             }
           }
