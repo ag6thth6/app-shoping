@@ -26,20 +26,11 @@ class LinebotsController < ApplicationController
           	message = { type: 'text', text: "こんにちは！"}
           	client.reply_message(event['replyToken'], message)
 	  when '天気'
-		uri = URI.parse('http://www.drk7.jp/weather/xml/13.xml')
-    		xml = Net::HTTP.get(uri)
-    		doc = REXML::Document.new(xml)
-		xpath = 'weatherforecast/pref/area[4]'
-		weather = doc.elements[xpath + '/info/weather'].text # 天気（例：「晴れ」）
-		max = doc.elements[xpath + '/info/temperature/range[1]'].text # 最高気温
-		min = doc.elements[xpath + '/info/temperature/range[2]'].text # 最低気温
-		per00to06 = doc.elements[xpath + '/info/rainfallchance/period[1]'].text # 0-6時の降水確率
-		per06to12 = doc.elements[xpath + '/info/rainfallchance/period[2]'].text # 6-12時の降水確率
-		per12to18 = doc.elements[xpath + '/info/rainfallchance/period[3]'].text # 12-18時の降水確率
-		per18to24 = doc.elements[xpath + '/info/rainfallchance/period[4]'].text # 18-24時の降水確率
+		message = search_weather(input)
+        	client.reply_message(event['replyToken'], message)
           else
 	        # search_and_create_messageメソッド内で、楽天APIを用いた商品検索、メッセージの作成を行う
-    	    message = search_and_create_message(input)
+		message = search_and_create_message(input)
         	client.reply_message(event['replyToken'], message)
           end
         end
@@ -55,6 +46,44 @@ class LinebotsController < ApplicationController
       config.channel_secret = ENV['LINE_CHANNEL_SECRET']
       config.channel_token = ENV['LINE_CHANNEL_TOKEN']
     end
+  end
+
+  def search_weather(input)
+	uri = URI.parse('http://www.drk7.jp/weather/xml/13.xml')
+	xml = Net::HTTP.get(uri)
+	doc = REXML::Document.new(xml)
+	xpath = 'weatherforecast/pref/area[4]'
+	weather = doc.elements[xpath + '/info/weather'].text # 天気（例：「晴れ」）
+	max = doc.elements[xpath + '/info/temperature/range[1]'].text # 最高気温
+	min = doc.elements[xpath + '/info/temperature/range[2]'].text # 最低気温
+	per00to06 = doc.elements[xpath + '/info/rainfallchance/period[1]'].text # 0-6時の降水確率
+	per06to12 = doc.elements[xpath + '/info/rainfallchance/period[2]'].text # 6-12時の降水確率
+	per12to18 = doc.elements[xpath + '/info/rainfallchance/period[3]'].text # 12-18時の降水確率
+	per18to24 = doc.elements[xpath + '/info/rainfallchance/period[4]'].text # 18-24時の降水確率
+	message = { type: 'text', text: weather}
+  end
+
+  def make_reply_content(items)
+    {
+      "type": 'flex',
+      "altText": 'This is a Flex Message',
+      "contents":
+      {
+        "type": 'carousel',
+        "contents": [
+          make_part(items[0]),
+          make_part(items[1]),
+          make_part(items[2]),
+          make_part(items[3]),
+          make_part(items[4]),
+          make_part(items[5]),
+          make_part(items[6]),
+          make_part(items[7]),
+          make_part(items[8]),
+          make_part(items[9])
+        ]
+      }
+    }
   end
 
   def search_and_create_message(input)
