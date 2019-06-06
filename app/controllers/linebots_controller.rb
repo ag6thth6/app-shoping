@@ -28,7 +28,7 @@ class LinebotsController < ApplicationController
 	  when '天気'
           	message = { type: 'text', text: "天気ね"}
           	client.reply_message(event['replyToken'], message)
-		uri = URI.parse('http://www.drk7.jp/weather/xml/13.xml')
+		uri = URI.parse('https://www.drk7.jp/weather/xml/13.xml')
 		xml = Net::HTTP.get(uri)
 		doc = REXML::Document.new(xml)
 		xpath = 'weatherforecast/pref/area[4]'
