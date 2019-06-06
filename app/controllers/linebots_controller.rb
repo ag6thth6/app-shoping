@@ -26,15 +26,11 @@ class LinebotsController < ApplicationController
           	message = { type: 'text', text: "こんにちは！"}
           	client.reply_message(event['replyToken'], message)
 	  when '天気'
-          	message = { type: 'text', text: "天気ね"}
-          	client.reply_message(event['replyToken'], message)
-		message = { type: 'text', text: "ちょっと待て"}
-          	client.reply_message(event['replyToken'], message)
-		#uri = URI.parse('https://www.drk7.jp/weather/xml/13.xml')
-		#xml = Net::HTTP.get(uri)
-		#doc = REXML::Document.new(xml)
-		#xpath = 'weatherforecast/pref/area[4]'
-		#weather = doc.elements[xpath + '/info/weather'].text # 天気（例：「晴れ」）
+		uri = URI.parse('https://www.drk7.jp/weather/xml/13.xml')
+		xml = Net::HTTP.get(uri)
+		doc = REXML::Document.new(xml)
+		xpath = 'weatherforecast/pref/area[4]'
+		weather = doc.elements[xpath + '/info/weather'].text # 天気（例：「晴れ」）
 		#max = doc.elements[xpath + '/info/temperature/range[1]'].text # 最高気温
 		#min = doc.elements[xpath + '/info/temperature/range[2]'].text # 最低気温
 		#per00to06 = doc.elements[xpath + '/info/rainfallchance/period[1]'].text # 0-6時の降水確率
