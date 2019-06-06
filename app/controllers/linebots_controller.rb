@@ -26,6 +26,8 @@ class LinebotsController < ApplicationController
           	message = { type: 'text', text: "こんにちは！"}
           	client.reply_message(event['replyToken'], message)
 	  when '天気'
+          	message = { type: 'text', text: "天気ね"}
+          	client.reply_message(event['replyToken'], message)
 		message = search_weather(input)
         	client.reply_message(event['replyToken'], message)
           else
