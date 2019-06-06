@@ -26,18 +26,7 @@ class LinebotsController < ApplicationController
           	message = { type: 'text', text: "こんにちは！"}
           	client.reply_message(event['replyToken'], message)
 	  when '天気'
-		uri = URI.parse('https://www.drk7.jp/weather/xml/13.xml')
-		xml = Net::HTTP.get(uri)
-		doc = REXML::Document.new(xml)
-		xpath = 'weatherforecast/pref/area[4]'
-		weather = doc.elements[xpath + '/info/weather'].text # 天気（例：「晴れ」）
-		#max = doc.elements[xpath + '/info/temperature/range[1]'].text # 最高気温
-		#min = doc.elements[xpath + '/info/temperature/range[2]'].text # 最低気温
-		#per00to06 = doc.elements[xpath + '/info/rainfallchance/period[1]'].text # 0-6時の降水確率
-		#per06to12 = doc.elements[xpath + '/info/rainfallchance/period[2]'].text # 6-12時の降水確率
-		#per12to18 = doc.elements[xpath + '/info/rainfallchance/period[3]'].text # 12-18時の降水確率
-		#per18to24 = doc.elements[xpath + '/info/rainfallchance/period[4]'].text # 18-24時の降水確率
-		message = {"type": 'text', text: weather}
+		message = search_weather(input)
         	client.reply_message(event['replyToken'], message)
           else
 	        # search_and_create_messageメソッド内で、楽天APIを用いた商品検索、メッセージの作成を行う
@@ -60,17 +49,17 @@ class LinebotsController < ApplicationController
   end
 
   def search_weather(input)
-	uri = URI.parse('http://www.drk7.jp/weather/xml/13.xml')
+	uri = URI.parse('https://www.drk7.jp/weather/xml/13.xml')
 	xml = Net::HTTP.get(uri)
 	doc = REXML::Document.new(xml)
 	xpath = 'weatherforecast/pref/area[4]'
 	weather = doc.elements[xpath + '/info/weather'].text # 天気（例：「晴れ」）
-	max = doc.elements[xpath + '/info/temperature/range[1]'].text # 最高気温
-	min = doc.elements[xpath + '/info/temperature/range[2]'].text # 最低気温
-	per00to06 = doc.elements[xpath + '/info/rainfallchance/period[1]'].text # 0-6時の降水確率
-	per06to12 = doc.elements[xpath + '/info/rainfallchance/period[2]'].text # 6-12時の降水確率
-	per12to18 = doc.elements[xpath + '/info/rainfallchance/period[3]'].text # 12-18時の降水確率
-	per18to24 = doc.elements[xpath + '/info/rainfallchance/period[4]'].text # 18-24時の降水確率
+	#max = doc.elements[xpath + '/info/temperature/range[1]'].text # 最高気温
+	#min = doc.elements[xpath + '/info/temperature/range[2]'].text # 最低気温
+	#per00to06 = doc.elements[xpath + '/info/rainfallchance/period[1]'].text # 0-6時の降水確率
+	#per06to12 = doc.elements[xpath + '/info/rainfallchance/period[2]'].text # 6-12時の降水確率
+	#per12to18 = doc.elements[xpath + '/info/rainfallchance/period[3]'].text # 12-18時の降水確率
+	#per18to24 = doc.elements[xpath + '/info/rainfallchance/period[4]'].text # 18-24時の降水確率
 	{
 		"type": 'text', text: weather
 	}
