@@ -37,11 +37,8 @@ class LinebotsController < ApplicationController
 		#per06to12 = doc.elements[xpath + '/info/rainfallchance/period[2]'].text # 6-12時の降水確率
 		#per12to18 = doc.elements[xpath + '/info/rainfallchance/period[3]'].text # 12-18時の降水確率
 		#per18to24 = doc.elements[xpath + '/info/rainfallchance/period[4]'].text # 18-24時の降水確率
-		#message = {"type": 'text', text: weather}
-		#message = search_weather(input)
-        	#client.reply_message(event['replyToken'], message)
-		message = { type: 'text', text: "ほらよ"}
-          	client.reply_message(event['replyToken'], message)
+		message = {"type": 'text', text: weather}
+        	client.reply_message(event['replyToken'], message)
           else
 	        # search_and_create_messageメソッド内で、楽天APIを用いた商品検索、メッセージの作成を行う
 		message = search_and_create_message(input)
