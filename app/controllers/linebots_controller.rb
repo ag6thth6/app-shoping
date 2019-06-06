@@ -42,6 +42,8 @@ class LinebotsController < ApplicationController
 		message = {"type": 'text', text: weather}
 		#message = search_weather(input)
         	client.reply_message(event['replyToken'], message)
+		message = { type: 'text', text: "ほらよ"}
+          	client.reply_message(event['replyToken'], message)
           else
 	        # search_and_create_messageメソッド内で、楽天APIを用いた商品検索、メッセージの作成を行う
 		message = search_and_create_message(input)
