@@ -60,11 +60,9 @@ class LinebotsController < ApplicationController
 	per06to12 = doc.elements[xpath + '/info/rainfallchance/period[2]'].text # 6-12時の降水確率
 	per12to18 = doc.elements[xpath + '/info/rainfallchance/period[3]'].text # 12-18時の降水確率
 	per18to24 = doc.elements[xpath + '/info/rainfallchance/period[4]'].text # 18-24時の降水確率
-	make_reply_weather(weather)
-  end
-
-  def make_reply_weather(weather)
-    {"type": 'text', text:weather}
+	{
+		"type": 'text', text: weather
+	}
   end
 	
   def search_and_create_message(input)
