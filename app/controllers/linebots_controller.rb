@@ -60,32 +60,13 @@ class LinebotsController < ApplicationController
 	per06to12 = doc.elements[xpath + '/info/rainfallchance/period[2]'].text # 6-12時の降水確率
 	per12to18 = doc.elements[xpath + '/info/rainfallchance/period[3]'].text # 12-18時の降水確率
 	per18to24 = doc.elements[xpath + '/info/rainfallchance/period[4]'].text # 18-24時の降水確率
-	message = { type: 'text', text: weather}
+	make_reply_weather(weather)
   end
 
-  def make_reply_content(items)
-    {
-      "type": 'flex',
-      "altText": 'This is a Flex Message',
-      "contents":
-      {
-        "type": 'carousel',
-        "contents": [
-          make_part(items[0]),
-          make_part(items[1]),
-          make_part(items[2]),
-          make_part(items[3]),
-          make_part(items[4]),
-          make_part(items[5]),
-          make_part(items[6]),
-          make_part(items[7]),
-          make_part(items[8]),
-          make_part(items[9])
-        ]
-      }
-    }
+  def make_reply_weather(weather)
+    {"type": 'text', text:weather}
   end
-
+	
   def search_and_create_message(input)
     RakutenWebService.configuration do |c|
       c.application_id = ENV['RAKUTEN_APPID']
