@@ -141,6 +141,7 @@ end
 	end
 	xml = Net::HTTP.get(uri)
 	doc = REXML::Document.new(xml)
+	date = doc.elements[xpath + '/info[1]'].attributes["date"]
 	weather = doc.elements[xpath + '/info[1]/weather'].text # 天気（例：「晴れ」）
 	img = doc.elements[xpath + '/info[1]/img'].text # 天気（例：「晴れ」）
 	#max = doc.elements[xpath + '/info[1]/temperature/range[1]'].text # 最高気温
@@ -155,14 +156,14 @@ end
 #	}
 {
   "type": "template",
-  "altText": "this is a carousel template",
+  "altText": "一週間の" +input + "や！",
   "template": {
       "type": "carousel",
       "columns": [
           {
-            "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+            "thumbnailImageUrl": img,
             "imageBackgroundColor": "#FFFFFF",
-            "title": "this is menu",
+            "title": date,
             "text": "description",
             "defaultAction": {
                 "type": "uri",
