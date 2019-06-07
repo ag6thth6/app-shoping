@@ -161,7 +161,7 @@ end
       "type": "carousel",
       "columns": [
           {
-            "thumbnailImageUrl": "http://www.drk7.jp/MT/images/MTWeather/300.gif",
+            "thumbnailImageUrl": "https://www.drk7.jp/MT/images/MTWeather/300.gif",
             "imageBackgroundColor": "#FFFFFF",
             "title": "this is menu",
             "text": "description",
