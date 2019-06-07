@@ -23,7 +23,12 @@ class LinebotsController < ApplicationController
           input = event.message['text']
           case input
           when 'こんにちは','よう','こんにちわ','こんばんは','こんばんわ'
-          	message = { type: 'text', text: "おす"}
+		cnt = cnt + 1
+		if cnt > 1
+			message = { type: 'text', text: "おす"}
+		else
+			message = { type: 'text', text: "しつこいなあ"}
+		end
           	client.reply_message(event['replyToken'], message)
 	  when '天気'
 		message = choice()
