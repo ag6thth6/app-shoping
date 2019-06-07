@@ -175,7 +175,7 @@ end
 	  #"thumbnailImageUrl": img.sub(/http/,"https"),
 	  "imageBackgroundColor": "#FFFFFF",
 	  "title": "this is menu",
-	  "text": img.sub(/http/,"https"),
+	  #"text": img.sub(/http/,"https"),
 	}
   end
 	
