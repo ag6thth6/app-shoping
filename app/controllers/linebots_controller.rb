@@ -187,9 +187,6 @@ end
   end
 
   def create_weatheritem(input,doc,xpath,i)
-	d = Date.today
-	d = d + i.to_i - 1
-	wday = %w(日 月 火 水 木 土)[d.wday]
 	date = doc.elements[xpath + '/info[' + i + ']'].attributes["date"]
 	weather = doc.elements[xpath + '/info[' + i + ']/weather'].text # 天気（例：「晴れ」）
 	img = doc.elements[xpath + '/info[' + i + ']/img'].text
@@ -204,7 +201,7 @@ end
 		"thumbnailImageUrl": img,
 		"imageBackgroundColor": "#FFFFFF",
 		"title": input + " " + date + "(" + wday + ")",
-		"text": weather + "やで\n最高気温：" + max + "度\n最低気温：" + min + "度",
+		"text": weather + "\n気温:" + max + "-：" + min + "度\n降水確率\n0-6時:" + per00to06 + "%\n06-12時:" + per06to12 + "%\n12-18時:" + per12to18 + "%\n18-24時:" + per18to24 + "%",
 		"actions": [
 			{
 			    "type": "uri",
