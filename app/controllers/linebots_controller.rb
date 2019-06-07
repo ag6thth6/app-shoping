@@ -141,34 +141,41 @@ end
 	end
 	xml = Net::HTTP.get(uri)
 	doc = REXML::Document.new(xml)
-		
-	#max = doc.elements[xpath + '/info[1]/temperature/range[1]'].text # 最高気温
-	#min = doc.elements[xpath + '/info[1]/temperature/range[2]'].text # 最低気温
-	#per00to06 = doc.elements[xpath + '/info[1]/rainfallchance/period[1]'].text # 0-6時の降水確率
-	#per06to12 = doc.elements[xpath + '/info[1]/rainfallchance/period[2]'].text # 6-12時の降水確率
-	#per12to18 = doc.elements[xpath + '/info[1]/rainfallchance/period[3]'].text # 12-18時の降水確率
-	#per18to24 = doc.elements[xpath + '/info[1]/rainfallchance/period[4]'].text # 18-24時の降水確率
 	{
 	  "type": "template",
 	  "altText": "this is a carousel template",
 	  "template": {
 	      "type": "carousel",
 	      "columns": [
-		for i in 1..7 do
-			date = doc.elements[xpath + '/info[i]'].attributes["date"]
-			weather = doc.elements[xpath + '/info[i]/weather'].text # 天気（例：「晴れ」）
-			img = doc.elements[xpath + '/info[i]/img'].text # 天気（例：「晴れ」）
-			  {
-			    "thumbnailImageUrl": img.sub(/http/,"https"),
-			    "imageBackgroundColor": "#FFFFFF",
-			    "title": "this is menu",
-			    "text": "description",
-			  },
-		end
+		      create_weatheritem(doc,xpath,"1"),
+		      create_weatheritem(doc,xpath,"2"),
+		      create_weatheritem(doc,xpath,"3"),
+		      create_weatheritem(doc,xpath,"4"),
+		      create_weatheritem(doc,xpath,"5"),
+		      create_weatheritem(doc,xpath,"6"),
+		      create_weatheritem(doc,xpath,"7")
 	      ],
 	      "imageAspectRatio": "rectangle",
 	      "imageSize": "cover"
 	  }
+	}
+  end
+
+  def create_weatheritem(doc,xpath,i)
+	date = doc.elements[xpath + '/info[i]'].attributes["date"]
+	weather = doc.elements[xpath + '/info[i]/weather'].text # 天気（例：「晴れ」）
+	img = doc.elements[xpath + '/info[i]/img'].text # 天気（例：「晴れ」）
+	max = doc.elements[xpath + '/info[1]/temperature/range[1]'].text # 最高気温
+	min = doc.elements[xpath + '/info[1]/temperature/range[2]'].text # 最低気温
+	per00to06 = doc.elements[xpath + '/info[i]/rainfallchance/period[1]'].text # 0-6時の降水確率
+	per06to12 = doc.elements[xpath + '/info[i]/rainfallchance/period[2]'].text # 6-12時の降水確率
+	per12to18 = doc.elements[xpath + '/info[i]/rainfallchance/period[3]'].text # 12-18時の降水確率
+	per18to24 = doc.elements[xpath + '/info[i]/rainfallchance/period[4]'].text # 18-24時の降水確率
+	{
+	  "thumbnailImageUrl": img.sub(/http/,"https"),
+	  "imageBackgroundColor": "#FFFFFF",
+	  "title": "this is menu",
+	  "text": "description",
 	}
   end
 	
