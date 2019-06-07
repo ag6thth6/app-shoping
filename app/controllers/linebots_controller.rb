@@ -26,46 +26,7 @@ class LinebotsController < ApplicationController
           	message = { type: 'text', text: "おす"}
           	client.reply_message(event['replyToken'], message)
 	  when '天気'
-		message = {
-		    "type": "template",
-		    "altText": "どこの天気や？",
-		    "template": {
-			"type": "buttons",
-			"actions": [
-			    {
-				"type": "message",
-				"label": "大阪",
-				"text": "大阪の天気"
-			    },
-			    {
-				"type": "message",
-				"label": "京都",
-				"text": "京都の天気"
-			    },
-			    {
-				"type": "message",
-				"label": "奈良",
-				"text": "奈良の天気"
-			    },
-			    {
-				"type": "message",
-				"label": "滋賀",
-				"text": "滋賀の天気"
-			    },
-			    {
-				"type": "message",
-				"label": "三重",
-				"text": "三重の天気"
-			    },
-			    {
-				"type": "message",
-				"label": "和歌山",
-				"text": "和歌山の天気"
-			    }
-			],
-		    "text": "どこの天気や？"
-		  }
-		}
+		message = choice()
         	client.reply_message(event['replyToken'], message)
 	  when '大阪の天気'
 		message = search_weather(input) 
@@ -93,6 +54,48 @@ class LinebotsController < ApplicationController
     end
   end
 
+def choice()
+	{
+		"type": "template",
+		"altText": "どこの天気や？",
+		"template": {
+		"type": "buttons",
+		"actions": [
+		    {
+			"type": "message",
+			"label": "大阪",
+			"text": "大阪の天気"
+		    },
+		    {
+			"type": "message",
+			"label": "京都",
+			"text": "京都の天気"
+		    },
+		    {
+			"type": "message",
+			"label": "奈良",
+			"text": "奈良の天気"
+		    },
+		    {
+			"type": "message",
+			"label": "滋賀",
+			"text": "滋賀の天気"
+		    },
+		    {
+			"type": "message",
+			"label": "三重",
+			"text": "三重の天気"
+		    },
+		    {
+			"type": "message",
+			"label": "和歌山",
+			"text": "和歌山の天気"
+		    }
+		],
+		"text": "どこの天気や？"
+		}
+	}
+end
   def search_weather(input)
         case input
 		when '大阪の天気'
