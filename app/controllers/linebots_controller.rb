@@ -104,62 +104,8 @@ end
 	  "template": {
 	      "type": "carousel",
 	      "columns": [
-		  {
-		    "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
-		    "imageBackgroundColor": "#FFFFFF",
-		    "title": "this is menu",
-		    "text": "description",
-		    "defaultAction": {
-			"type": "uri",
-			"label": "View detail",
-			"uri": "http://example.com/page/123"
-		    },
-		    "actions": [
-			{
-			    "type": "postback",
-			    "label": "Buy",
-			    "data": "action=buy&itemid=111"
-			},
-			{
-			    "type": "postback",
-			    "label": "Add to cart",
-			    "data": "action=add&itemid=111"
-			},
-			{
-			    "type": "uri",
-			    "label": "View detail",
-			    "uri": "http://example.com/page/111"
-			}
-		    ]
-		  },
-		  {
-		    "thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
-		    "imageBackgroundColor": "#000000",
-		    "title": "this is menu",
-		    "text": "description",
-		    "defaultAction": {
-			"type": "uri",
-			"label": "View detail",
-			"uri": "http://example.com/page/222"
-		    },
-		    "actions": [
-			{
-			    "type": "postback",
-			    "label": "Buy",
-			    "data": "action=buy&itemid=222"
-			},
-			{
-			    "type": "postback",
-			    "label": "Add to cart",
-			    "data": "action=add&itemid=222"
-			},
-			{
-			    "type": "uri",
-			    "label": "View detail",
-			    "uri": "http://example.com/page/222"
-			}
-		    ]
-		  }
+			create_weatheritem(doc,xpath,1),
+		        create_weatheritem(doc,xpath,2)
 	      ],
 	      "imageAspectRatio": "rectangle",
 	      "imageSize": "cover"
@@ -179,22 +125,32 @@ end
 	per12to18 = doc.elements[xpath + '/info[i]/rainfallchance/period[3]'].text # 12-18時の降水確率
 	per18to24 = doc.elements[xpath + '/info[i]/rainfallchance/period[4]'].text # 18-24時の降水確率
 	{
-	  "thumbnailImageUrl": img,
-	  "imageBackgroundColor": "#FFFFFF",
-	  "title": "title",
-	  "text": "text",
- 	  "defaultAction": {
-              "type": "uri",
-              "label": "View detail",
-              "uri": "http://example.com/page/222"
-          },
-	  "actions": [
-		{
-		  "type": "uri",
-		  "label": "詳細",
-		  "uri": "https://hyouhikaku.com"
-		}
-	   ]
+		"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+		"imageBackgroundColor": "#FFFFFF",
+		"title": "this is menu",
+		"text": "description",
+		"defaultAction": {
+			"type": "uri",
+			"label": "View detail",
+			"uri": "http://example.com/page/123"
+		},
+		"actions": [
+			{
+			    "type": "postback",
+			    "label": "Buy",
+			    "data": "action=buy&itemid=111"
+			},
+			{
+			    "type": "postback",
+			    "label": "Add to cart",
+			    "data": "action=add&itemid=111"
+			},
+			{
+			    "type": "uri",
+			    "label": "View detail",
+			    "uri": "http://example.com/page/111"
+			}
+		]
 	}
   end
 	
