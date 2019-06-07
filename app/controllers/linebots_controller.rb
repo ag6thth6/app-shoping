@@ -156,14 +156,14 @@ end
 #	}
 {
   "type": "template",
-  "altText": "一週間の" +input + "や！",
+#  "altText": "一週間の" + input + "や！",
   "template": {
       "type": "carousel",
       "columns": [
           {
-            "thumbnailImageUrl": img,
+ #           "thumbnailImageUrl": img,
             "imageBackgroundColor": "#FFFFFF",
-            "title": date,
+  #          "title": date,
             "text": "description",
             "defaultAction": {
                 "type": "uri",
