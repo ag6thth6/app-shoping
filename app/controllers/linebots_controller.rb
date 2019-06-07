@@ -32,7 +32,8 @@ class LinebotsController < ApplicationController
 		message = search_weather(input) 
 		client.reply_message(event['replyToken'], message)
 	  when '京都の天気'
-		message = { type: 'text', text: "京都はやめとき"}
+		  message = sample()
+		#message = { type: 'text', text: "京都はやめとき"}
           	client.reply_message(event['replyToken'], message)
           else
 	        # search_and_create_messageメソッド内で、楽天APIを用いた商品検索、メッセージの作成を行う
@@ -54,6 +55,41 @@ class LinebotsController < ApplicationController
     end
   end
 
+def sample()
+	{
+	  "type": "text",
+	  "text": "Select your favorite food category or send me your location!",
+	  "quickReply": {
+	    "items": [
+	      {
+		"type": "action",
+		"imageUrl": "https://example.com/sushi.png",
+		"action": {
+		  "type": "message",
+		  "label": "Sushi",
+		  "text": "Sushi"
+		}
+	      },
+	      {
+		"type": "action",
+		"imageUrl": "https://example.com/tempura.png",
+		"action": {
+		  "type": "message",
+		  "label": "Tempura",
+		  "text": "Tempura"
+		}
+	      },
+	      {
+		"type": "action",
+		"action": {
+		  "type": "location",
+		  "label": "Send location"
+		}
+	      }
+	    ]
+	  }
+	}
+end
 def choice()
 	{
 		"type": "template",
