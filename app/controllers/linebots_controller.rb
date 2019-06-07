@@ -114,7 +114,7 @@ end
   end
 
   def create_weatheritem(doc,xpath,i)
-	weather = doc.elements[xpath + '/info[1]/weather'].text # 天気（例：「晴れ」）
+	weather = doc.elements[xpath + '/info[' + i + ']/weather'].text # 天気（例：「晴れ」）
 	{
 		"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
 		"imageBackgroundColor": "#FFFFFF",
