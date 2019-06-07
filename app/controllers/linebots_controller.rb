@@ -22,7 +22,7 @@ class LinebotsController < ApplicationController
           # 入力した文字をinputに格納
           input = event.message['text']
           case input
-          when 'こんにちは'
+          when 'こんにちは','よう','こんにちわ','こんばんは','こんばんわ'
           	message = { type: 'text', text: "おす"}
           	client.reply_message(event['replyToken'], message)
 	  when '天気'
@@ -200,8 +200,8 @@ end
 	{
 		"thumbnailImageUrl": img,
 		"imageBackgroundColor": "#FFFFFF",
-		"title": input + " " + date + "(" + wday + ")",
-		"text": weather + "\n気温:" + max + "-：" + min + "度\n降水確率\n0-6時:" + per00to06 + "%\n06-12時:" + per06to12 + "%\n12-18時:" + per12to18 + "%\n18-24時:" + per18to24 + "%",
+		"title": input + " " + date,
+		"text": weather + "\n" + max + "-：" + min + "度\n降水\n-6時:" + per00to06 + "%\n-12時:" + per06to12 + "%\n-18時:" + per12to18 + "%\n-24時:" + per18to24 + "%",
 		"actions": [
 			{
 			    "type": "uri",
