@@ -98,23 +98,30 @@ end
 	end
 	xml = Net::HTTP.get(uri)
 	doc = REXML::Document.new(xml)
-	{
-	  "type": "template",
-	  "altText": "this is a carousel template",
-	  "template": {
-	      "type": "carousel",
-	      "columns": [
-		  {
-		    "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
-		    "imageBackgroundColor": "#FFFFFF",
-		    "title": "this is menu",
-		    "text": "description"
-		  }
-	      ],
-	      "imageAspectRatio": "rectangle",
-	      "imageSize": "cover"
-	  }
-	}
+{
+  "type": "template",
+  "altText": "this is a carousel template",
+  "template": {
+      "type": "carousel",
+      "columns": [
+          {
+            "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+            "imageBackgroundColor": "#FFFFFF",
+            "title": "this is menu",
+            "text": "description",
+            "actions": [
+                {
+                    "type": "uri",
+                    "label": "詳細",
+                    "uri": "https://hyouhikaku.com"
+                }
+            ]
+          }
+      ],
+      "imageAspectRatio": "rectangle",
+      "imageSize": "cover"
+  }
+}
 =bigin	{
 	  "type": "template",
 	  "altText": "this is a carousel template",
