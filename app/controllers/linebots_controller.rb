@@ -114,16 +114,6 @@ end
   end
 
   def create_weatheritem(doc,xpath,i)
-	date = doc.elements[xpath + '/info[i]'].attributes["date"]
-	weather = doc.elements[xpath + '/info[i]/weather'].text # 天気（例：「晴れ」）
-	img = doc.elements[xpath + '/info[i]/img'].text # 天気（例：「晴れ」）
-	img = img.sub(/http/,"https")
-	max = doc.elements[xpath + '/info[1]/temperature/range[1]'].text # 最高気温
-	min = doc.elements[xpath + '/info[1]/temperature/range[2]'].text # 最低気温
-	per00to06 = doc.elements[xpath + '/info[i]/rainfallchance/period[1]'].text # 0-6時の降水確率
-	per06to12 = doc.elements[xpath + '/info[i]/rainfallchance/period[2]'].text # 6-12時の降水確率
-	per12to18 = doc.elements[xpath + '/info[i]/rainfallchance/period[3]'].text # 12-18時の降水確率
-	per18to24 = doc.elements[xpath + '/info[i]/rainfallchance/period[4]'].text # 18-24時の降水確率
 	{
 		"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
 		"imageBackgroundColor": "#FFFFFF",
