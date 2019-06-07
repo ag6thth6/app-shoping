@@ -21,33 +21,49 @@ class LinebotsController < ApplicationController
         when Line::Bot::Event::MessageType::Text
           # 入力した文字をinputに格納
           input = event.message['text']
-          case input
-          when 'こんにちは','よう','こんにちわ','こんばんは','こんばんわ'
-		cnt = cnt + 1
-		if cnt > 1
-			message = { type: 'text', text: "おす"}
+	if session[:message] = '楽天'
+		if input = 'やめる'
+			session[:message] = nil
+			message = { type: 'text', text: "やめたで。"}
+			client.reply_message(event['replyToken'], message)
 		else
-			message = { type: 'text', text: "しつこいなあ"}
+			message = search_and_create_message(input)
+			client.reply_message(event['replyToken'], message)
 		end
-          	client.reply_message(event['replyToken'], message)
-	  when '天気'
-		message = choice()
-        	client.reply_message(event['replyToken'], message)
-	  when '大阪の天気','奈良県北部の天気','奈良県南部の天気','京都府北部の天気','京都府南部の天気'
-		message = search_weather(input) 
-		client.reply_message(event['replyToken'], message)
-	  when '京都の天気'
-		message = kyoto_choice()
-          	client.reply_message(event['replyToken'], message)
-	  when '奈良の天気'
-		message = nara_choice()
-          	client.reply_message(event['replyToken'], message)
-          else
-	        # search_and_create_messageメソッド内で、楽天APIを用いた商品検索、メッセージの作成を行う
-		message = search_and_create_message(input)
-        	client.reply_message(event['replyToken'], message)
-          end
-        end
+	else
+		case input
+			when 'こんにちは','よう','こんにちわ','こんばんは','こんばんわ'
+				cnt = 0
+				cnt = cnt + 1
+				if cnt = 0
+					message = { type: 'text', text: "おす"}
+				else
+					message = { type: 'text', text: "しつこいなあ"}
+				end
+				client.reply_message(event['replyToken'], message)
+			when '天気'
+				message = choice()
+				client.reply_message(event['replyToken'], message)
+			when '大阪の天気','奈良県北部の天気','奈良県南部の天気','京都府北部の天気','京都府南部の天気'
+				message = search_weather(input) 
+				client.reply_message(event['replyToken'], message)
+			when '京都の天気'
+				message = kyoto_choice()
+				client.reply_message(event['replyToken'], message)
+			when '奈良の天気'
+				message = nara_choice()
+				client.reply_message(event['replyToken'], message)
+			when '楽天'
+				session[:message] = "楽天"
+				message = message = { type: 'text', text: "楽天な。好きなキーワードを入れろよ。検索するわ。やめたかったら「やめる」って送れ。"}
+				client.reply_message(event['replyToken'], message)
+			else
+				# search_and_create_messageメソッド内で、楽天APIを用いた商品検索、メッセージの作成を行う
+				message = search_and_create_message(input)
+				client.reply_message(event['replyToken'], message)
+			end
+		end
+	end
       end
     end
     head :ok
