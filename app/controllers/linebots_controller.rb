@@ -165,6 +165,7 @@ end
 	date = doc.elements[xpath + '/info[i]'].attributes["date"]
 	weather = doc.elements[xpath + '/info[i]/weather'].text # 天気（例：「晴れ」）
 	img = doc.elements[xpath + '/info[i]/img'].text # 天気（例：「晴れ」）
+	img = img.sub(/http/,"https")
 	max = doc.elements[xpath + '/info[1]/temperature/range[1]'].text # 最高気温
 	min = doc.elements[xpath + '/info[1]/temperature/range[2]'].text # 最低気温
 	per00to06 = doc.elements[xpath + '/info[i]/rainfallchance/period[1]'].text # 0-6時の降水確率
@@ -172,10 +173,10 @@ end
 	per12to18 = doc.elements[xpath + '/info[i]/rainfallchance/period[3]'].text # 12-18時の降水確率
 	per18to24 = doc.elements[xpath + '/info[i]/rainfallchance/period[4]'].text # 18-24時の降水確率
 	{
-	  #"thumbnailImageUrl": img.sub(/http/,"https"),
+	  "thumbnailImageUrl": img,
 	  "imageBackgroundColor": "#FFFFFF",
-	  "title": "this is menu",
-	  #"text": img.sub(/http/,"https"),
+	  "title": date,
+	  "text": weather,
 	}
   end
 	
