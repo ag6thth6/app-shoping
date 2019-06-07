@@ -133,7 +133,7 @@ end
 		"thumbnailImageUrl": img,
 		"imageBackgroundColor": "#FFFFFF",
 		"title": input + date,
-		"text": weather + "やで",
+		"text": weather + "やで\n最高気温：",
 		"actions": [
 			{
 			    "type": "uri",
