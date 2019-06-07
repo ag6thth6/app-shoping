@@ -108,7 +108,7 @@ end
 			  #"thumbnailImageUrl": img,
 			  "imageBackgroundColor": "#FFFFFF",
 			  "title": "title",
-			  "text": "text",
+			  "text": "text"
 		}
 		#      create_weatheritem(doc,xpath,1),
 		#     create_weatheritem(doc,xpath,2),
