@@ -141,86 +141,35 @@ end
 	end
 	xml = Net::HTTP.get(uri)
 	doc = REXML::Document.new(xml)
-	date = doc.elements[xpath + '/info[1]'].attributes["date"]
-	weather = doc.elements[xpath + '/info[1]/weather'].text # 天気（例：「晴れ」）
-	img = doc.elements[xpath + '/info[1]/img'].text # 天気（例：「晴れ」）
+		
 	#max = doc.elements[xpath + '/info[1]/temperature/range[1]'].text # 最高気温
 	#min = doc.elements[xpath + '/info[1]/temperature/range[2]'].text # 最低気温
 	#per00to06 = doc.elements[xpath + '/info[1]/rainfallchance/period[1]'].text # 0-6時の降水確率
 	#per06to12 = doc.elements[xpath + '/info[1]/rainfallchance/period[2]'].text # 6-12時の降水確率
 	#per12to18 = doc.elements[xpath + '/info[1]/rainfallchance/period[3]'].text # 12-18時の降水確率
 	#per18to24 = doc.elements[xpath + '/info[1]/rainfallchance/period[4]'].text # 18-24時の降水確率
-#	{
-#		"imageUrl": img,
-#		"type": 'text', text: weather
-#	}
-{
-  "type": "template",
-  "altText": "this is a carousel template",
-  "template": {
-      "type": "carousel",
-      "columns": [
-          {
-            "thumbnailImageUrl": img.sub(/http/,"https"),
-            "imageBackgroundColor": "#FFFFFF",
-            "title": "this is menu",
-            "text": "description",
-            "defaultAction": {
-                "type": "uri",
-                "label": "View detail",
-                "uri": "http://example.com/page/123"
-            },
-            "actions": [
-                {
-                    "type": "postback",
-                    "label": "Buy",
-                    "data": "action=buy&itemid=111"
-                },
-                {
-                    "type": "postback",
-                    "label": "Add to cart",
-                    "data": "action=add&itemid=111"
-                },
-                {
-                    "type": "uri",
-                    "label": "View detail",
-                    "uri": "http://example.com/page/111"
-                }
-            ]
-          },
-          {
-            "thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
-            "imageBackgroundColor": "#000000",
-            "title": "this is menu",
-            "text": "description",
-            "defaultAction": {
-                "type": "uri",
-                "label": "View detail",
-                "uri": "http://example.com/page/222"
-            },
-            "actions": [
-                {
-                    "type": "postback",
-                    "label": "Buy",
-                    "data": "action=buy&itemid=222"
-                },
-                {
-                    "type": "postback",
-                    "label": "Add to cart",
-                    "data": "action=add&itemid=222"
-                },
-                {
-                    "type": "uri",
-                    "label": "View detail",
-                    "uri": "http://example.com/page/222"
-                }
-            ]
-          }
-      ],
-      "imageAspectRatio": "rectangle",
-      "imageSize": "cover"
-  }
-}
+	{
+	  "type": "template",
+	  "altText": "this is a carousel template",
+	  "template": {
+	      "type": "carousel",
+	      "columns": [
+		for i in 1..7 do
+			date = doc.elements[xpath + '/info[i]'].attributes["date"]
+			weather = doc.elements[xpath + '/info[i]/weather'].text # 天気（例：「晴れ」）
+			img = doc.elements[xpath + '/info[i]/img'].text # 天気（例：「晴れ」）
+			  {
+			    "thumbnailImageUrl": img.sub(/http/,"https"),
+			    "imageBackgroundColor": "#FFFFFF",
+			    "title": "this is menu",
+			    "text": "description",
+			  },
+		end
+	      ],
+	      "imageAspectRatio": "rectangle",
+	      "imageSize": "cover"
+	  }
+	}
   end
 	
   def search_and_create_message(input)
