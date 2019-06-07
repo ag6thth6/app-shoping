@@ -104,8 +104,8 @@ end
 	  "template": {
 	      "type": "carousel",
 	      "columns": [
-			create_weatheritem(doc,xpath,1),
-		        create_weatheritem(doc,xpath,2)
+			create_weatheritem(doc,xpath,"1"),
+		        create_weatheritem(doc,xpath,"2")
 	      ],
 	      "imageAspectRatio": "rectangle",
 	      "imageSize": "cover"
