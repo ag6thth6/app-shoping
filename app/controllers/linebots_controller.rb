@@ -28,11 +28,14 @@ class LinebotsController < ApplicationController
 	  when '天気'
 		message = choice()
         	client.reply_message(event['replyToken'], message)
-	  when '大阪の天気'
+	  when '大阪の天気','奈良県北部の天気','奈良県南部の天気','京都府北部の天気','京都府南部の天気'
 		message = search_weather(input) 
 		client.reply_message(event['replyToken'], message)
 	  when '京都の天気'
-		message = { type: 'text', text: "京都はやめとき"}
+		message = kyoto_choice()
+          	client.reply_message(event['replyToken'], message)
+	  when '奈良の天気'
+		message = nara_choice()
           	client.reply_message(event['replyToken'], message)
           else
 	        # search_and_create_messageメソッド内で、楽天APIを用いた商品検索、メッセージの作成を行う
@@ -88,13 +91,78 @@ def choice()
 	  }
 	}
 end
+
+def nara_choice()
+	{
+	  "type": "text",
+	  "text": "奈良のどこや？",
+	  "quickReply": {
+	    "items": [
+	      {
+		"type": "action",
+		"action": {
+		  "type": "message",
+		  "label": "北部",
+		  "text": "奈良県北部の天気"
+		}
+	      },
+	      {
+		"type": "action",
+		"action": {
+		  "type": "message",
+		  "label": "南部",
+		  "text": "奈良県南部の天気"
+		}
+	      }
+	    ]
+	  }
+	}
+end
+
+def kyoto_choice()
+	{
+	  "type": "text",
+	  "text": "京都のどこや？",
+	  "quickReply": {
+	    "items": [
+	      {
+		"type": "action",
+		"action": {
+		  "type": "message",
+		  "label": "北部",
+		  "text": "京都府北部の天気"
+		}
+	      },
+	      {
+		"type": "action",
+		"action": {
+		  "type": "message",
+		  "label": "南部",
+		  "text": "京都府南部の天気"
+		}
+	      }
+	    ]
+	  }
+	}
+end
 	
   def search_weather(input)
         case input
 		when '大阪の天気'
 			uri = URI.parse('https://www.drk7.jp/weather/xml/27.xml')
 			xpath = 'weatherforecast/pref/area[1]'
-		when '京都の天気'	
+		when '奈良県北部の天気'
+			uri = URI.parse('https://www.drk7.jp/weather/xml/27.xml')
+			xpath = 'weatherforecast/pref/area[1]'
+		when '奈良県南部の天気'
+			uri = URI.parse('https://www.drk7.jp/weather/xml/27.xml')
+			xpath = 'weatherforecast/pref/area[2]'
+		when '京都府北部の天気'
+			uri = URI.parse('https://www.drk7.jp/weather/xml/27.xml')
+			xpath = 'weatherforecast/pref/area[1]'
+		when '京都府南部の天気'
+			uri = URI.parse('https://www.drk7.jp/weather/xml/27.xml')
+			xpath = 'weatherforecast/pref/area[2]'
 	end
 	xml = Net::HTTP.get(uri)
 	doc = REXML::Document.new(xml)
