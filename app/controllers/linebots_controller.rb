@@ -172,10 +172,10 @@ end
 	per12to18 = doc.elements[xpath + '/info[i]/rainfallchance/period[3]'].text # 12-18時の降水確率
 	per18to24 = doc.elements[xpath + '/info[i]/rainfallchance/period[4]'].text # 18-24時の降水確率
 	{
-	  "thumbnailImageUrl": img.sub(/http/,"https"),
+	  #"thumbnailImageUrl": img.sub(/http/,"https"),
 	  "imageBackgroundColor": "#FFFFFF",
 	  "title": "this is menu",
-	  "text": "description",
+	  "text": img.sub(/http/,"https"),
 	}
   end
 	
