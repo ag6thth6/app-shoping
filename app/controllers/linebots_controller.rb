@@ -131,7 +131,8 @@ end
 	      ]
 	  }
 	}
-=bigin	{
+	  =bigin
+	{
 	  "type": "template",
 	  "altText": "this is a carousel template",
 	  "template": {
@@ -148,7 +149,8 @@ end
 	      "imageAspectRatio": "rectangle",
 	      "imageSize": "cover"
 	  }
-	} =end
+	}
+	  =end
   end
 
   def create_weatheritem(doc,xpath,i)
