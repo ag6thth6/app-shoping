@@ -152,16 +152,16 @@ end
 			uri = URI.parse('https://www.drk7.jp/weather/xml/27.xml')
 			xpath = 'weatherforecast/pref/area[1]'
 		when '奈良県北部の天気'
-			uri = URI.parse('https://www.drk7.jp/weather/xml/27.xml')
+			uri = URI.parse('https://www.drk7.jp/weather/xml/29.xml')
 			xpath = 'weatherforecast/pref/area[1]'
 		when '奈良県南部の天気'
-			uri = URI.parse('https://www.drk7.jp/weather/xml/27.xml')
+			uri = URI.parse('https://www.drk7.jp/weather/xml/29.xml')
 			xpath = 'weatherforecast/pref/area[2]'
 		when '京都府北部の天気'
-			uri = URI.parse('https://www.drk7.jp/weather/xml/27.xml')
+			uri = URI.parse('https://www.drk7.jp/weather/xml/26.xml')
 			xpath = 'weatherforecast/pref/area[1]'
 		when '京都府南部の天気'
-			uri = URI.parse('https://www.drk7.jp/weather/xml/27.xml')
+			uri = URI.parse('https://www.drk7.jp/weather/xml/26.xml')
 			xpath = 'weatherforecast/pref/area[2]'
 	end
 	xml = Net::HTTP.get(uri)
@@ -201,7 +201,7 @@ end
 		"thumbnailImageUrl": img,
 		"imageBackgroundColor": "#FFFFFF",
 		"title": input + " " + date,
-		"text": weather + "\n最高気温：" + max + "度\n最低気温：" + min + "度"
+		"text": weather + "\n最高気温：" + max + "度\n最低気温：" + min + "度",
 		"actions": [
 			{
 			    "type": "uri",
