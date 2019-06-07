@@ -119,7 +119,6 @@ end
   end
 
   def create_weatheritem(input,doc,xpath,i)
-	require 'date'
 	d = Date.today
 	d = d + i.to_i - 1
 	wday = %w(日 月 火 水 木 土)[d.wday]
