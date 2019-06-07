@@ -121,7 +121,11 @@ end
 		"title": "this is menu",
 		"text": "description",
 		"actions": [
-
+			{
+			    "type": "uri",
+			    "label": "View detail",
+			    "uri": "http://example.com/page/111"
+			}
 		]
 	}
   end
