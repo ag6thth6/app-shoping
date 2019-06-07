@@ -147,13 +147,13 @@ end
 	  "template": {
 	      "type": "carousel",
 	      "columns": [
-		      create_weatheritem(doc,xpath,"1"),
-		      create_weatheritem(doc,xpath,"2"),
-		      create_weatheritem(doc,xpath,"3"),
-		      create_weatheritem(doc,xpath,"4"),
-		      create_weatheritem(doc,xpath,"5"),
-		      create_weatheritem(doc,xpath,"6"),
-		      create_weatheritem(doc,xpath,"7")
+		      create_weatheritem(doc,xpath,1),
+		      create_weatheritem(doc,xpath,2),
+		      create_weatheritem(doc,xpath,3),
+		      create_weatheritem(doc,xpath,4),
+		      create_weatheritem(doc,xpath,5),
+		      create_weatheritem(doc,xpath,6),
+		      create_weatheritem(doc,xpath,7)
 	      ],
 	      "imageAspectRatio": "rectangle",
 	      "imageSize": "cover"
