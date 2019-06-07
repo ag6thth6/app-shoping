@@ -104,6 +104,23 @@ end
 	  "template": {
 	      "type": "carousel",
 	      "columns": [
+		  {
+		    "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+		    "imageBackgroundColor": "#FFFFFF",
+		    "title": "this is menu",
+		    "text": "description",
+		  }
+	      ],
+	      "imageAspectRatio": "rectangle",
+	      "imageSize": "cover"
+	  }
+	}
+=bigin	{
+	  "type": "template",
+	  "altText": "this is a carousel template",
+	  "template": {
+	      "type": "carousel",
+	      "columns": [
 		{
 			  #"thumbnailImageUrl": img,
 			  "imageBackgroundColor": "#FFFFFF",
@@ -121,7 +138,7 @@ end
 	      "imageAspectRatio": "rectangle",
 	      "imageSize": "cover"
 	  }
-	}
+	} =end
   end
 
   def create_weatheritem(doc,xpath,i)
