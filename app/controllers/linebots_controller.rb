@@ -88,6 +88,7 @@ def choice()
 	  }
 	}
 end
+	
   def search_weather(input)
         case input
 		when '大阪の天気'
@@ -103,13 +104,13 @@ end
 	  "template": {
 	      "type": "carousel",
 	      "columns": [
-			create_weatheritem(doc,xpath,"1"),
-		        create_weatheritem(doc,xpath,"2"),
-		        create_weatheritem(doc,xpath,"3"),
-		        create_weatheritem(doc,xpath,"4"),
-		        create_weatheritem(doc,xpath,"5"),
-		        create_weatheritem(doc,xpath,"6"),
-		        create_weatheritem(doc,xpath,"7")
+			create_weatheritem(input,doc,xpath,"1"),
+		        create_weatheritem(input,doc,xpath,"2"),
+		        create_weatheritem(input,doc,xpath,"3"),
+		        create_weatheritem(input,doc,xpath,"4"),
+		        create_weatheritem(input,doc,xpath,"5"),
+		        create_weatheritem(input,doc,xpath,"6"),
+		        create_weatheritem(input,doc,xpath,"7")
 	      ],
 	      "imageAspectRatio": "rectangle",
 	      "imageSize": "cover"
@@ -117,7 +118,7 @@ end
 	}
   end
 
-  def create_weatheritem(doc,xpath,i)
+  def create_weatheritem(input,doc,xpath,i)
 	date = doc.elements[xpath + '/info[' + i + ']'].attributes["date"]
 	weather = doc.elements[xpath + '/info[' + i + ']/weather'].text # 天気（例：「晴れ」）
 	img = doc.elements[xpath + '/info[' + i + ']/img'].text
@@ -131,8 +132,8 @@ end
 	{
 		"thumbnailImageUrl": img,
 		"imageBackgroundColor": "#FFFFFF",
-		"title": date,
-		"text": weather,
+		"title": input + date,
+		"text": weather + "やで。" + "\n" + "最高気温：" + max + "\n" + "最低気温：" + min + "\n" + "00-06時" + per00to06 + "%" +"\n" + "06-12時" + per06to12 + "%" +"\n" + "12-18時" + per12to18 + "%" +"\n" + "18-24時" + per18to24 + "%",
 		"actions": [
 			{
 			    "type": "uri",
