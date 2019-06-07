@@ -161,7 +161,7 @@ end
       "type": "carousel",
       "columns": [
           {
-            "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+            "thumbnailImageUrl": img,
             "imageBackgroundColor": "#FFFFFF",
             "title": "this is menu",
             "text": "description",
