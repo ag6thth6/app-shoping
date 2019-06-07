@@ -110,12 +110,12 @@ end
 		      create_weatheritem(doc,xpath,4),
 		      create_weatheritem(doc,xpath,5),
 		      create_weatheritem(doc,xpath,6),
-		     create_weatheritem(doc,xpath,7)
+	     	      create_weatheritem(doc,xpath,7)
 	      ],
 	      "imageAspectRatio": "rectangle",
 	      "imageSize": "cover"
 	  }
-	} =end
+	}
   end
 
   def create_weatheritem(doc,xpath,i)
