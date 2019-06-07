@@ -134,6 +134,11 @@ end
 	  "imageBackgroundColor": "#FFFFFF",
 	  "title": "title",
 	  "text": "text",
+ 	  "defaultAction": {
+              "type": "uri",
+              "label": "View detail",
+              "uri": "http://example.com/page/222"
+          },
 	  "actions": [
 		{
 		  "type": "uri",
