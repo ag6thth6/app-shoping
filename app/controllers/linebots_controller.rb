@@ -55,81 +55,38 @@ class LinebotsController < ApplicationController
     end
   end
 
-def sample()
+def choice()
 	{
 	  "type": "text",
-	  "text": "Select your favorite food category or send me your location!",
+	  "text": "どこの天気を調べるん？",
 	  "quickReply": {
 	    "items": [
 	      {
 		"type": "action",
-		"imageUrl": "https://example.com/sushi.png",
 		"action": {
 		  "type": "message",
-		  "label": "Sushi",
-		  "text": "Sushi"
-		}
-	      },
-	      {
-		"type": "action",
-		"imageUrl": "https://example.com/tempura.png",
-		"action": {
-		  "type": "message",
-		  "label": "Tempura",
-		  "text": "Tempura"
+		  "label": "大阪",
+		  "text": "大阪の天気"
 		}
 	      },
 	      {
 		"type": "action",
 		"action": {
-		  "type": "location",
-		  "label": "Send location"
+		  "type": "message",
+		  "label": "京都",
+		  "text": "京都の天気"
+		}
+	      },
+	      {
+		"type": "action",
+		"action": {
+		  "type": "message",
+		  "label": "奈良",
+		  "text": "奈良の天気"
 		}
 	      }
 	    ]
 	  }
-	}
-end
-def choice()
-	{
-		"type": "template",
-		"altText": "どこの天気や？",
-		"template": {
-		"type": "buttons",
-		"actions": [
-		    {
-			"type": "message",
-			"label": "大阪",
-			"text": "大阪の天気"
-		    },
-		    {
-			"type": "message",
-			"label": "京都",
-			"text": "京都の天気"
-		    },
-		    {
-			"type": "message",
-			"label": "奈良",
-			"text": "奈良の天気"
-		    },
-		    {
-			"type": "message",
-			"label": "滋賀",
-			"text": "滋賀の天気"
-		    },
-		    {
-			"type": "message",
-			"label": "三重",
-			"text": "三重の天気"
-		    },
-		    {
-			"type": "message",
-			"label": "和歌山",
-			"text": "和歌山の天気"
-		    }
-		],
-		"text": "どこの天気や？"
-		}
 	}
 end
   def search_weather(input)
@@ -147,13 +104,19 @@ end
 	  "template": {
 	      "type": "carousel",
 	      "columns": [
-		      create_weatheritem(doc,xpath,1),
-		      create_weatheritem(doc,xpath,2),
-		      create_weatheritem(doc,xpath,3),
-		      create_weatheritem(doc,xpath,4),
-		      create_weatheritem(doc,xpath,5),
-		      create_weatheritem(doc,xpath,6),
-		      create_weatheritem(doc,xpath,7)
+		{
+			  #"thumbnailImageUrl": img,
+			  "imageBackgroundColor": "#FFFFFF",
+			  "title": "title",
+			  "text": "text",
+		}
+		#      create_weatheritem(doc,xpath,1),
+		#     create_weatheritem(doc,xpath,2),
+		#      create_weatheritem(doc,xpath,3),
+		#      create_weatheritem(doc,xpath,4),
+		#      create_weatheritem(doc,xpath,5),
+		 #     create_weatheritem(doc,xpath,6),
+		  #    create_weatheritem(doc,xpath,7)
 	      ],
 	      "imageAspectRatio": "rectangle",
 	      "imageSize": "cover"
