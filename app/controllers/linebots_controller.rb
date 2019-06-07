@@ -3,7 +3,6 @@ class LinebotsController < ApplicationController
   require 'net/http'
   require 'uri'
   require 'rexml/document'
-  require 'date'
 
   # callbackアクションのCSRFトークン認証を無効
   protect_from_forgery except: [:callback]
@@ -120,10 +119,10 @@ end
   end
 
   def create_weatheritem(input,doc,xpath,i)
+	require 'date'
 	d = Date.today
 	d = d + i.to_i - 1
-	JAPANESE_WDAY = %w(日 月 火 水 木 土)
-	wday = JAPANESE_WDAY[d.wday] #=> "火"
+	wday = %w(日 月 火 水 木 土)[d.wday]
 	date = doc.elements[xpath + '/info[' + i + ']'].attributes["date"]
 	weather = doc.elements[xpath + '/info[' + i + ']/weather'].text # 天気（例：「晴れ」）
 	img = doc.elements[xpath + '/info[' + i + ']/img'].text
