@@ -201,12 +201,12 @@ end
 		"thumbnailImageUrl": img,
 		"imageBackgroundColor": "#FFFFFF",
 		"title": input + " " + date,
-		"text": weather + "\n" + max + "-：" + min + "度\n降水\n-6時:" + per00to06 + "%\n-12時:" + per06to12 + "%\n-18時:" + per12to18 + "%\n-24時:" + per18to24 + "%",
+		"text": weather + "\n最高気温：" + max + "度\n最低気温：" + min + "度"
 		"actions": [
 			{
 			    "type": "uri",
 			    "label": "View detail",
-			    "uri": "http://example.com/page/111"
+			    "uri": "https://hyouhikaku.com"
 			}
 		]
 	}
