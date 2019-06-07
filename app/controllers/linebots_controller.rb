@@ -96,14 +96,16 @@ end
 			xpath = 'weatherforecast/pref/area[1]'
 		when '京都の天気'	
 	end
+	xml = Net::HTTP.get(uri)
+	doc = REXML::Document.new(xml)
 	{
 	  "type": "template",
 	  "altText": "this is a carousel template",
 	  "template": {
 	      "type": "carousel",
 	      "columns": [
-			create_weatheritem(uri,xpath,"1"),
-		        create_weatheritem(uri,xpath,"2")
+			create_weatheritem(doc,xpath,"1"),
+		        create_weatheritem(doc,xpath,"2")
 	      ],
 	      "imageAspectRatio": "rectangle",
 	      "imageSize": "cover"
@@ -112,8 +114,7 @@ end
   end
 
   def create_weatheritem(uri,xpath,i)
-	xml = Net::HTTP.get(uri)
-	doc = REXML::Document.new(xml)
+	weather = doc.elements[xpath + '/info[' + i + ']/weather'].text # 天気（例：「晴れ」）
 	{
 		"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
 		"imageBackgroundColor": "#FFFFFF",
