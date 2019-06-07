@@ -23,11 +23,56 @@ class LinebotsController < ApplicationController
           input = event.message['text']
           case input
           when 'こんにちは'
-          	message = { type: 'text', text: "こんにちは！"}
+          	message = { type: 'text', text: "おす"}
           	client.reply_message(event['replyToken'], message)
 	  when '天気'
-		message = search_weather(input)
+		message = {
+		    "type": "template",
+		    "altText": "どこの天気や？",
+		    "template": {
+			"type": "buttons",
+			"actions": [
+			    {
+				"type": "message",
+				"label": "大阪",
+				"text": "大阪の天気"
+			    },
+			    {
+				"type": "message",
+				"label": "京都",
+				"text": "京都の天気"
+			    },
+			    {
+				"type": "message",
+				"label": "奈良",
+				"text": "奈良の天気"
+			    },
+			    {
+				"type": "message",
+				"label": "滋賀",
+				"text": "滋賀の天気"
+			    },
+			    {
+				"type": "message",
+				"label": "三重",
+				"text": "三重の天気"
+			    },
+			    {
+				"type": "message",
+				"label": "和歌山",
+				"text": "和歌山の天気"
+			    }
+			],
+		    "text": "どこの天気や？"
+		  }
+		}
         	client.reply_message(event['replyToken'], message)
+	  when '大阪の天気'
+		message = search_weather(input) 
+		client.reply_message(event['replyToken'], message)
+	  when '京都の天気'
+		message = { type: 'text', text: "京都はやめとき"}
+          	client.reply_message(event['replyToken'], message)
           else
 	        # search_and_create_messageメソッド内で、楽天APIを用いた商品検索、メッセージの作成を行う
 		message = search_and_create_message(input)
@@ -49,18 +94,24 @@ class LinebotsController < ApplicationController
   end
 
   def search_weather(input)
-	uri = URI.parse('https://www.drk7.jp/weather/xml/13.xml')
+        case input
+		when '大阪の天気'
+			uri = URI.parse('https://www.drk7.jp/weather/xml/27.xml')
+			xpath = 'weatherforecast/pref/area[1]'
+		when '京都の天気'	
+	end
 	xml = Net::HTTP.get(uri)
 	doc = REXML::Document.new(xml)
-	xpath = 'weatherforecast/pref/area[4]'
-	weather = doc.elements[xpath + '/info/weather'].text # 天気（例：「晴れ」）
-	#max = doc.elements[xpath + '/info/temperature/range[1]'].text # 最高気温
-	#min = doc.elements[xpath + '/info/temperature/range[2]'].text # 最低気温
-	#per00to06 = doc.elements[xpath + '/info/rainfallchance/period[1]'].text # 0-6時の降水確率
-	#per06to12 = doc.elements[xpath + '/info/rainfallchance/period[2]'].text # 6-12時の降水確率
-	#per12to18 = doc.elements[xpath + '/info/rainfallchance/period[3]'].text # 12-18時の降水確率
-	#per18to24 = doc.elements[xpath + '/info/rainfallchance/period[4]'].text # 18-24時の降水確率
+	weather = doc.elements[xpath + '/info[1]/weather'].text # 天気（例：「晴れ」）
+	img = doc.elements[xpath + '/info[1]/img'].text # 天気（例：「晴れ」）
+	#max = doc.elements[xpath + '/info[1]/temperature/range[1]'].text # 最高気温
+	#min = doc.elements[xpath + '/info[1]/temperature/range[2]'].text # 最低気温
+	#per00to06 = doc.elements[xpath + '/info[1]/rainfallchance/period[1]'].text # 0-6時の降水確率
+	#per06to12 = doc.elements[xpath + '/info[1]/rainfallchance/period[2]'].text # 6-12時の降水確率
+	#per12to18 = doc.elements[xpath + '/info[1]/rainfallchance/period[3]'].text # 12-18時の降水確率
+	#per18to24 = doc.elements[xpath + '/info[1]/rainfallchance/period[4]'].text # 18-24時の降水確率
 	{
+		"imageUrl": img,
 		"type": 'text', text: weather
 	}
   end
