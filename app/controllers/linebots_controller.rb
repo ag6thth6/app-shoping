@@ -133,7 +133,7 @@ end
 		"thumbnailImageUrl": img,
 		"imageBackgroundColor": "#FFFFFF",
 		"title": input + date,
-		"text": weather + "やで。" + "\n" + "最高気温：" + max + "\n" + "最低気温：" + min + "\n" + "00-06時" + per00to06 + "%" +"\n" + "06-12時" + per06to12 + "%" +"\n" + "12-18時" + per12to18 + "%" +"\n" + "18-24時" + per18to24 + "%",
+		"text": weather + "やで。\n最高気温：" + max + "度\n最低気温：" + min + "度\n降水確率\n00-06時" + per00to06 + "%\n06-12時" + per06to12 + "%\n12-18時" + per12to18 + "%\n18-24時" + per18to24 + "%",
 		"actions": [
 			{
 			    "type": "uri",
