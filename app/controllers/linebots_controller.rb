@@ -21,11 +21,9 @@ class LinebotsController < ApplicationController
 		when Line::Bot::Event::MessageType::Text
 			# 入力した文字をinputに格納
 			input = event.message['text']
-			sessionmessage = session[:message]
-			case sessionmessage
-			when '楽天'
-				case input
-				when 'やめる'
+			sessionmassage = session[:message]
+			if sessionmassage = '楽天'
+				if input = 'やめる'
 					session[:message] = nil
 					message = { type: 'text', text: "やめたで。"}
 					client.reply_message(event['replyToken'], message)
@@ -66,6 +64,7 @@ class LinebotsController < ApplicationController
 					client.reply_message(event['replyToken'], message)
 				end
 			end
+		end
 		end
 	end
 	head :ok
