@@ -21,7 +21,8 @@ class LinebotsController < ApplicationController
         when Line::Bot::Event::MessageType::Text
           # 入力した文字をinputに格納
           input = event.message['text']
-	if session[:message] = '楽天'
+	  sessionmassage = session[:message]
+	if sessionmassage = '楽天'
 		if input = 'やめる'
 			session[:message] = nil
 			message = { type: 'text', text: "やめたで。"}
